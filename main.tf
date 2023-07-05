@@ -1,6 +1,16 @@
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.6.2"
+    }
+  }
+}
+
 provider "aws" {
   region = var.aws_region
 }
+
 
 #Create security group with firewall rules
 resource "aws_security_group" "my_security_group" {
