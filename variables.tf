@@ -27,8 +27,3 @@ variable "ami_id" {
   description = "AMI for AML Ec2 instance"
   default     = "ami-038056f5d3df2259d"
 }
-
-variable "iam_policy_name" {
-  description = "Allow EC2"
-  default     = "AmazonEC2FullAccess"
-}
