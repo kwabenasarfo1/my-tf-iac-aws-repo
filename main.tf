@@ -53,3 +53,39 @@ tags= {
     Name = "my_elastic_ip"
   }
 }
+
+
+# Creat EIP
+resource "aws_eip" "jenkins-eip" {
+  domain = "vpc"
+
+  instance                  = aws_instance.myFirstInstance.id
+  associate_with_private_ip = "10.0.0.12"
+  depends_on                = [aws_internet_gateway.gw]
+}
+
+
+
+
+# Create IAM policy
+resource "aws_iam_policy" "jenkins_iam_policy" {
+  name = var.iam_policy_name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:GetSecretValue",
+          "ssm:GetParameter",
+          "ssm:GetParameters",
+          "ssm:GetParametersByPath"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+
