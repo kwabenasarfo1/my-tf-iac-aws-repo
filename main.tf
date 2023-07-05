@@ -1,12 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "5.6.2"
-    }
-  }
-}
-
 provider "aws" {
   region = var.aws_region
 }
@@ -59,31 +50,5 @@ resource "aws_instance" "myFirstInstance" {
 # Creat EIP
 resource "aws_eip" "jenkins-eip" {
   domain = "vpc"
-  instance                  = aws_instance.myFirstInstance.id
+  instance  = aws_instance.myFirstInstance.id
 }
-
-
-
-
-# Create IAM policy
-resource "aws_iam_policy" "jenkins_iam_policy" {
-  name = var.iam_policy_name
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = [
-          "secretsmanager:GetSecretValue",
-          "ssm:GetParameter",
-          "ssm:GetParameters",
-          "ssm:GetParametersByPath"
-        ]
-        Resource = "*"
-      }
-    ]
-  })
-}
-
-
