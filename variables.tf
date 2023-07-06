@@ -24,6 +24,6 @@ variable "tag_name" {
 }
 
 variable "ami_id" {
-  description = "AMI for AML Ec2 instance"
+  description = "AMI for AML-2023 Ec2 instance"
   default     = "ami-038056f5d3df2259d"
 }
